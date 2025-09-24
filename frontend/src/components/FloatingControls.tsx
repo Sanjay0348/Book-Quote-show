@@ -9,7 +9,6 @@ import {
   Moon,
   Home,
   RotateCcw,
-  Settings
 } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useQuotes } from '@/contexts/QuoteContext';
