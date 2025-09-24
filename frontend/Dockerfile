@@ -7,11 +7,11 @@ WORKDIR /app
 COPY package*.json ./
 
 # Development stage
-FROM base AS development
-RUN npm install
-COPY . .
-EXPOSE 3000
-CMD ["npm", "run", "dev"]
+# FROM base AS development
+# RUN npm install
+# COPY . .
+# EXPOSE 3000
+# CMD ["npm", "run", "dev"]
 
 # Build stage
 FROM base AS build
