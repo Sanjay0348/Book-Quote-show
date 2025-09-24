@@ -13,6 +13,7 @@ COPY package*.json ./
 # # Build stage
 FROM base AS build
 # install ALL deps (including dev) for build
+RUN npm install -g nodemon
 RUN npm install
 COPY . .
 RUN npm run build

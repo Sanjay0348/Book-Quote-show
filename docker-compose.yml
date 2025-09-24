@@ -34,7 +34,6 @@ services:
       - /app/node_modules
     networks:
       - book-quotes-network
-    command: npm run dev
 
   # Frontend React Application
   frontend:
