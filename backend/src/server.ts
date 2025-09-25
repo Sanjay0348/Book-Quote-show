@@ -44,9 +44,9 @@ app.get('/health', (req, res) => {
 });
 
 // API Routes
-app.use('/api/quotes', quotesRouter);
-app.use('/api/categories', categoriesRouter);
-app.use('/api/stats', statsRouter);
+app.use('/quotes', quotesRouter);
+app.use('/categories', categoriesRouter);
+app.use('/stats', statsRouter);
 
 // 404 handler
 app.use('*', (req, res) => {
