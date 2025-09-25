@@ -1,35 +1,28 @@
-# Base stage
-FROM node:18-alpine AS base
+# --- Build stage ---
+FROM node:18-alpine AS build
 WORKDIR /app
+
+# Install dependencies
 COPY package*.json ./
-
-# Development stage
-# FROM base AS development
-# RUN npm install
-# COPY . .
-# EXPOSE 5000
-# CMD ["npm", "run", "dev"]
-
-# # Build stage
-FROM base AS build
-# install ALL deps (including dev) for build
-RUN npm install -g nodemon
 RUN npm install
+
+# Copy source and build
 COPY . .
 RUN npm run build
 
-# Production stage
-FROM node:18-alpine AS production
+
+# --- Runtime stage ---
+FROM node:18-alpine AS runtime
 WORKDIR /app
 
-# copy only required stuff
-COPY --from=build /app/dist ./dist
+# Copy only package files for production install
 COPY package*.json ./
-
-# install only prod deps
 RUN npm install --omit=dev && npm cache clean --force
 
-# create non-root user
+# Copy built artifacts from build stage
+COPY --from=build /app/dist ./dist
+
+# Create non-root user
 RUN addgroup -g 1001 -S nodejs \
     && adduser -S backend -u 1001
 USER backend
